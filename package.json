@@ -12,8 +12,7 @@
     "dev:client": "vite client",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch --import tsx/esm server/server.ts"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -42,11 +41,14 @@
     "@types/node": "^25.7.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/supertest": "^7.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "concurrently": "^9.2.1",
     "cors": "^2.8.6",
+    "supertest": "^7.2.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "vitest": "^4.1.6"
   }
 }
