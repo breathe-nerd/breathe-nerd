@@ -25,11 +25,6 @@
     cursor: pointer;
 }
 
-.breathing-content h1 {
-    margin: 0;
-    font-size: 3rem;
-    line-height: 1;
-}
 
 .breathing-circle {
     width: 320px;
@@ -40,6 +35,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
 }
 
 .breathing-count {
@@ -47,4 +44,25 @@
     font-weight: 700;
     line-height: 1;
     color: #fdfaf3;
+}
+
+.app-title {
+    font-size: 3rem;
+    color: rgba(255, 250, 240, 0.75);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-message {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(255, 250, 240, 0.55);
+    margin-bottom: 1rem;
+}
+
+.phase-display {
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fffaf0;
 }

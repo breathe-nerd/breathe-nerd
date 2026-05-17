@@ -8,100 +8,60 @@ type BreathingPageProps = {
 };
 
 /*
-  BreathingPage MVP Plan
+  BreathingPage remaining work:
 
-  Goal:
-  Build the logged-in breathing experience:
-  landing view → guided breathing session → completion view.
-
-  Done:
-  [x] Accept props from App.tsx:
-      - user: User | null
-      - onLogout: () => Promise<void>
-      - isBlurred?: boolean
-
-  [x] Build initial landing view:
-      - title
-      - static breathing circle
-      - start button
-
-  [x] Add breathing state:
-      - breathe
-      - phase
-      - count
-      - timeRemaining
-
-  [x] Add start behavior:
-      - Start button begins session
-      - session starts with inhale
-      - count starts at 4
-
-  [x] Add breathing loop:
-      - inhale: 4, 3, 2, 1
-      - pause after inhale
-      - exhale: 6, 5, 4, 3, 2, 1
-      - pause after exhale
-      - repeat cycle
-
-  [x] Display both pause phases as "pause"
-
-  [x] Hide countdown number during pause phases
-
-  [x] Stop session timer after 140 seconds
-
-  Tomorrow:
-  [ ] Replace temporary end behavior:
-      - instead of returning to landing screen when timeRemaining reaches 0
-      - set phase/session state to complete
-
-  [ ] Build completion screen:
-      - show completed message
-      - show Start Again button
-      - show Finish / Logout button
-
-  [ ] Add Start Again behavior:
-      - reset timeRemaining to 140
-      - reset count
-      - restart at inhale
-
-  [ ] Add Finish / Logout behavior:
-      - call onLogout()
-
-  [ ] Clean up display helpers:
-      - keep internal phase values specific
-      - keep user-facing text simple
-
-  [ ] Review unused props/state:
-      - user
-      - isBlurred
-      - any temporary console logs
-
-  [ ] Test full flow:
-      - landing screen
-      - start session
-      - breathing loop
-      - automatic completion after 140 seconds
-      - start again
-      - logout
-
-  /*
-  Stretch:
   [ ] Animate the breathing circle:
       - grow during inhale
       - hold during pause
       - shrink during exhale
       - hold during pause
 
-  [ ] Personalize the welcome screen:
-      - display the user's name after login
-      - fallback gracefully if name is missing
+  [ ] Finish user connection:
+      - confirm user name displays correctly after backend auth is complete
+      - keep fallback welcome message if user or name is missing
+
+  [ ] Use isBlurred prop:
+      - blur or visually soften the breathing page when LoginModal is open
+      - keep LoginModal as the focused foreground UI
+
+  [ ] Cleanup:
+      - remove temporary console logs
+      - set timeRemaining back to 140 after testing
+      - decide whether Stop should reset phase/count/timeRemaining
+      - add class names for completion screen styling
+      - make button text/capitalization consistent
+      - check spelling in comments
+      - test landing → breathing loop → completion → repeat
+      - test logout after backend auth routes are finished
 */
 
-function BreathingPage({ user, onLogout, isBlurred }) {
+function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
+  /*
+  Create welcome message:
+  -if user has a name, include user's name
+  -otherwise show default message
+  */
+
+  const welcomeMessage = user?.name ? `Welcome, ${user.name}` : "Welcome, nerd";
+
+  /*
+  State variable declarations to track:
+  -whether the beathing session has started
+  -the current breathing phase
+  -the countdown number for the current phase
+  -the total time remaining in the current breathing session
+  -keep track of when the session is complete
+  */
+
   const [breathe, setBreathe] = useState(false);
   const [phase, setPhase] = useState("notStarted");
   const [count, setCount] = useState(4);
-  const [timeRemaining, setTimeRemaining] = useState(140);
+  const [timeRemaining, setTimeRemaining] = useState(24);
+  const [isComplete, setIsComplete] = useState(false);
+
+  /* 
+  Helper functions for moving through the breathing cycle
+  */
 
   function goToInhale() {
     setBreathe(true);
@@ -111,7 +71,7 @@ function BreathingPage({ user, onLogout, isBlurred }) {
 
   function goToPauseAfterInhale() {
     setPhase("pauseAfterInhale");
-    setCount(2);
+    setCount(1);
   }
 
   function goToExhale() {
@@ -121,16 +81,31 @@ function BreathingPage({ user, onLogout, isBlurred }) {
 
   function goToPauseAfterExhale() {
     setPhase("pauseAfterExhale");
-    setCount(2);
+    setCount(1);
   }
 
   function handleStart() {
     goToInhale();
   }
 
+  function handleStop() {
+    setBreathe(false);
+  }
+
+  function handleRepeat() {
+    setIsComplete(false);
+    goToInhale();
+  }
+
+  /* 
+  Helper functions to display/hide text
+  -displays both pause phases simple as "pause"
+  -hides countdown number during pauses so screen doesn't feel too text heavy
+  */
+
   function getPhaseDisplayText() {
     if (!breathe) {
-      return "Breathe, Nerd";
+      return "";
     } else if (phase === "pauseAfterInhale" || phase === "pauseAfterExhale") {
       return "pause";
     } else {
@@ -148,6 +123,19 @@ function BreathingPage({ user, onLogout, isBlurred }) {
     }
   }
 
+  /* 
+  Use useEffect to run the breahting loop:
+  -if the session has not started, do nothing
+  -when it starts, run an interval every second
+  -decrement the total time remaning
+  -decrement the count for the current phase
+  -check which phase the user is currently in
+  -move to the next phase when the current count finishes
+  -repeat the inhale, pause, exhale, pause cycle until total time <= 1
+  -when total time <= 1 clear timer, set breathe to false, set is complete to true, reset time remaining
+  -clear the interval so multiple timers don't run at once
+  */
+
   useEffect(() => {
     if (!breathe) {
       return;
@@ -158,11 +146,13 @@ function BreathingPage({ user, onLogout, isBlurred }) {
         if (currentTime <= 1) {
           clearInterval(timer);
           setBreathe(false);
-          return 140;
+          setIsComplete(true);
+          return 24;
         }
         console.log("currentTime", currentTime);
         return currentTime - 1;
       });
+
       if (count > 1) {
         setCount((currentCount) => currentCount - 1);
       } else if (phase === "inhale") {
@@ -179,18 +169,60 @@ function BreathingPage({ user, onLogout, isBlurred }) {
     return () => {
       clearInterval(timer);
     };
+
+    /* 
+    Place breathe, count, and phase state variables inside the dependency array
+    -effect re-runs when breathing session starts
+    -also re-runs each time count or phase changes
+    -this keeps timer and current breathing state synced 
+    */
   }, [breathe, count, phase]);
+
+  /* 
+    If breathing session is complete
+    -return a completion screen
+    -show buttons to start another session or log out
+    */
+
+  if (isComplete) {
+    return (
+      <main className="breathing-page">
+        <section className="breathing-content">
+          <h1>Session Promise Resolved</h1>
+
+          <button onClick={handleRepeat}>run again</button>
+          <button onClick={onLogout}>git checkout reality</button>
+        </section>
+      </main>
+    );
+  }
+
+  /* 
+  Otherwise, render the main page:
+  -apply CSS classes for layout and styling
+  -display title
+  -welcome message appears until breathing cycle begins
+  -current breathing instruction begins when start button is clicked
+  -show animated breathing circle
+  -show count when appropriate
+  -show button that starts breathing session to start
+  -show button that stops breathing session once cycle begins
+  */
 
   return (
     <main className="breathing-page">
       <section className="breathing-content">
-        <h1>{getPhaseDisplayText()}</h1>
+        <p className="app-title">Breathe Nerd</p>
+        {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
+
+        <h1 className="phase-display">{getPhaseDisplayText()}</h1>
 
         <div className="breathing-circle">
           <span className="breathing-count">{getCountDisplayText()}</span>
         </div>
 
         {!breathe && <button onClick={handleStart}>npm install calm</button>}
+        {breathe && <button onClick={handleStop}>esc</button>}
       </section>
     </main>
   );
