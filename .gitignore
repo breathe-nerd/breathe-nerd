@@ -8,16 +8,14 @@ node_modules/
 
 # Build output
 dist/
+dist-ssr/
 build/
 .next/
 out/
 
 # Environment / secrets
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
 *.pem
 
 # Logs
@@ -27,19 +25,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.env
+# Editor / OS
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 Thumbs.db
-*.swp
+*.swp4
 *.swo
 
 # Testing / coverage
@@ -49,7 +41,9 @@ coverage/
 # TypeScript
 *.tsbuildinfo
 
-# Misc
+# Cache / misc
 .cache/
 .parcel-cache/
 .eslintcache
+*.local
+**/*.map
