@@ -1,0 +1,68 @@
+.breathing-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.breathing-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+}
+
+.breathing-content button {
+    font: inherit;
+    font-size: 1.35rem;
+    font-weight: 700;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 999px;
+    background: #fdfaf3;
+    color: #404040;
+    cursor: pointer;
+}
+
+
+.breathing-circle {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: #E8D588;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+}
+
+.breathing-count {
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fdfaf3;
+}
+
+.app-title {
+    font-size: 3rem;
+    color: rgba(255, 250, 240, 0.75);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-message {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(255, 250, 240, 0.55);
+    margin-bottom: 1rem;
+}
+
+.phase-display {
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fffaf0;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { User } from "./types";
 import LoginModal from "./components/LoginModal";
 import BreathingPage from "./components/BreathingPage";
+import "./App.css";
 
 /*
   Responsibilities:
