@@ -2,16 +2,14 @@
   "name": "breathe-nerd",
   "version": "1.0.0",
   "description": "Breathe Nerd is a low-friction breathing exercise web app for developers and people who work at computers. The goal is simple: open the app, breathe for a short guided exercise, and get back to work.",
-  "main": "server/server.ts",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "node --watch --import tsx/esm server/server.ts",
     "dev:client": "vite client",
+    "type-check:server": "tsc --project tsconfig.json --noEmit",
+    "type-check:client": "tsc --project tsconfig.app.json --noEmit",
     "build": "tsc -b && vite build client",
-    "preview": "vite preview",
+    "preview": "vite preview client",
     "start": "node --watch --import tsx/esm server/server.ts",
     "test": "vitest"
   },
@@ -31,6 +29,7 @@
     "@supabase/supabase-js": "^2.105.4",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "cors": "^2.8.6",
     "express-session": "^1.19.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
@@ -45,7 +44,6 @@
     "@types/supertest": "^7.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "concurrently": "^9.2.1",
-    "cors": "^2.8.6",
     "supertest": "^7.2.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
