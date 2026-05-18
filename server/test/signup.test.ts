@@ -73,4 +73,16 @@ describe('POST /auth/signup', () => {
     expect(res.body.user.password_hash).toBeUndefined()
     expect(res.body.user.password).toBeUndefined()
   })
+
+  it('should create a session after succesful signup', async () => {
+    const res = await request(app) 
+    .post('/auth/signup')
+    .send({
+      email: 'testuser@test.com',
+      password: 'password123',
+      name: 'Test User'
+    })
+
+    expect(res.headers['set-cookie']).toBeDefined()
+  })
 })
