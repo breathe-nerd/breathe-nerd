@@ -34,6 +34,25 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) spec: `<
 
 This follows the Conventional Commits spec, which is the most common standard in professional projects.
 
+## Pre-PR Checklist
+
+Before opening a pull request, make sure you have done the following:
+
+1. Pull the latest dev and merge into your branch
+```bash
+   git switch dev
+   git pull
+   git switch your-branch-name
+   git merge dev
+```
+2. Run `npm install` to make sure dependencies are up to date
+3. Run `npm run type-check:server` if you touched any server files
+4. Run `npm run type-check:client` if you touched any client files
+5. Test your changes locally and confirm nothing is broken
+6. Make sure no `console.log` statements are left in your code
+7. Push your branch to GitHub
+8. Fill out the PR description — Summary, Changes, Testing
+
 ## Pull Request Description Format
 
 When opening a pull request, use the following format:
@@ -72,6 +91,12 @@ Adds a Git workflow practice section to the README.
 
 - Not run; documentation-only change
 ```
+## Testing Conventions
+
+- All test files live in `server/test/`
+- One test file per route or feature — do not combine multiple routes in one file
+- Name test files after what they test — `signup.test.ts`, `verify.test.ts`, `middleware.test.ts`
+- Run `npm test` to run the full test suite before opening a PR
 
 ## Code Comment Guidelines
 
