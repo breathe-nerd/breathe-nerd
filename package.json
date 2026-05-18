@@ -27,6 +27,7 @@
   "homepage": "https://github.com/breathe-nerd/breathe-nerd#readme",
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "cors": "^2.8.6",
@@ -35,6 +36,7 @@
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
