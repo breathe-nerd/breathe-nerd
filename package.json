@@ -12,6 +12,7 @@
     "dev:client": "vite client",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "start": "node --watch --import tsx/esm server/server.ts",
     "test": "vitest"
   },
   "repository": {
