@@ -176,10 +176,9 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
   if (isComplete) {
     return (
-      <main className="breathing-page">
-        <section className="breathing-content">
+      <main key="complete" className="breathing-page">
+        <section className="breathing-content completion-screen">
           <h1>Session Promise Resolved</h1>
-
           <button onClick={handleRepeat}>run again</button>
           <button onClick={onLogout}>git checkout reality</button>
         </section>
@@ -202,6 +201,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
   return (
     <main
+      key="breathing"
       className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}
     >
       <section className="breathing-content">
