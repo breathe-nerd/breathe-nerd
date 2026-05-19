@@ -68,11 +68,16 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   }
 
   function handleStart() {
-    goToInhale();
+    setPhase("notStarted");
+    setTimeout(() => {
+      goToInhale();
+    }, 50)
   }
 
   function handleStop() {
     setBreathe(false);
+    setPhase("notStarted");
+    setCount(4)
   }
 
   function handleRepeat() {
@@ -202,7 +207,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
         <h1 className="phase-display">{getPhaseDisplayText()}</h1>
 
-        <div className="breathing-circle">
+        <div className={`breathing-circle breathing-circle--${phase}`}>
           <span className="breathing-count">{getCountDisplayText()}</span>
         </div>
 

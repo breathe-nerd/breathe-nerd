@@ -1,7 +1,4 @@
-
-
-
-
+/* LoginModal */
 .modal-overlay {
     position: fixed; 
     inset: 0; 
@@ -122,10 +119,7 @@
   text-decoration: underline;
 }
 
-
-
-
-
+/* BreathingPage */
 .breathing-page {
     min-height: 100vh;
     display: flex;
@@ -159,18 +153,37 @@
     cursor: pointer;
 }
 
-
 .breathing-circle {
     width: 320px;
     height: 320px;
     border-radius: 50%;
     background: #E8D588;
-
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: -2rem;
     margin-bottom: 2rem;
+    transition: transform 4s ease-in-out;
+}
+
+.breathing-circle--inhale {
+  transform: scale(1);
+}
+
+.breathing-circle--pauseAfterInhale {
+  transform: scale(1);
+}
+
+.breathing-circle--exhale {
+  transform: scale(0.50);
+}
+
+.breathing-circle--pauseAfterExhale {
+  transform: scale(0.50);
+}
+
+.breathing-circle--notStarted {
+  transform: scale(0.7)
 }
 
 .breathing-count {
