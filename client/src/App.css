@@ -151,6 +151,15 @@
     background: #fdfaf3;
     color: #404040;
     cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.breathing-content button:hover {
+  transform: scale(1.04);
+}
+
+.breathing-content button:active {
+  transform: scale(0.97)
 }
 
 .breathing-circle {
