@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "node --watch --import tsx/esm server/server.ts",
-    "dev:client": "vite client",
+    "dev:client": "vite client --host",
     "type-check:server": "tsc --project tsconfig.json --noEmit",
     "type-check:client": "tsc --project tsconfig.app.json --noEmit",
     "build": "tsc -b && vite build client",
