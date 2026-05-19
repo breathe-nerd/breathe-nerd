@@ -25,7 +25,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   -otherwise show default message
   */
 
-  const welcomeMessage = user?.name ? `Welcome, ${user.name}` : "Welcome, nerd";
+  const welcomeMessage = user?.name ? `Ready ${user.name}? ` : "Ready nerd?";
 
   /*
   State variable declarations to track:
@@ -71,21 +71,21 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
     setPhase("notStarted");
     setTimeout(() => {
       goToInhale();
-    }, 50)
+    }, 50);
   }
 
   function handleStop() {
     setBreathe(false);
     setPhase("notStarted");
-    setCount(4)
+    setCount(4);
   }
 
   function handleRepeat() {
     setIsComplete(false);
-    setPhase("notStarted")
+    setPhase("notStarted");
     setTimeout(() => {
       goToInhale();
-    }, 50)
+    }, 50);
   }
 
   /* 
@@ -202,15 +202,18 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   return (
     <main
       key="breathing"
-      className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}>
+      className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}
+    >
       <section className="breathing-content">
-        <p className="app-title">Breathe Nerd</p>
+        <p className="app-title">Breathe, Nerd</p>
         {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
 
-        <h1 className="phase-display" key={phase}>{getPhaseDisplayText()}</h1>
-        <div className="circle-wrspper">
+        <h1 className="phase-display" key={phase}>
+          {getPhaseDisplayText()}
+        </h1>
+        <div className="circle-wrapper">
           <svg className="progress-ring" viewBox="0 0 520 520">
-            <circle 
+            <circle
               className="progress-ring__track"
               cx="260"
               cy="260"
@@ -222,8 +225,10 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
               cy="260"
               r="252"
               strokeDasharray="1583"
-              strokeDashoffset={breathe ? 1583 - ((24 - timeRemaining) / 24 * 1583) : 1583}
-              />
+              strokeDashoffset={
+                breathe ? 1583 - ((24 - timeRemaining) / 24) * 1583 : 1583
+              }
+            />
           </svg>
 
           <div className={`breathing-circle breathing-circle--${phase}`}>
