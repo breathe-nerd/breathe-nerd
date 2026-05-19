@@ -90,7 +90,7 @@ router.post("/signup", async (req: Request, res: Response, next: NextFunction) =
       .from("users")
       .insert({
         email,
-        password: hashedPassword,
+        password_hash: hashedPassword,
         name,
       })
       .select("id, email, name")
@@ -126,7 +126,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
 
     const { data: user, error } = await supabase
       .from("users")
-      .select("id, email, name, password")
+      .select("id, email, name, password_hash")
       .eq("email", email)
       .single();
 
@@ -136,7 +136,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
       });
     }
 
-    const passwordMatches = await bcrypt.compare(password, user.password);
+    const passwordMatches = await bcrypt.compare(password, user.password_hash);
 
     if (!passwordMatches) {
       return res.status(401).json({
