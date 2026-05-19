@@ -20,6 +20,53 @@ import oceanWaves from "./assets/ocean-waves.mp3";
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  function startAudio() {
+    if (!audioRef.current) { 
+      audioRef.current = new Audio(oceanWaves); 
+      audioRef.current.loop = true; 
+      audioRef.current.volume = 0.3; 
+    }
+
+    audioRef.current.play().catch((error) => {
+      console.error("Audio failed to play:", error);
+    });
+  }
+
+  function stopAudio() {
+    if (!audioRef.current) {
+      return; 
+    }
+
+    audioRef.current.pause(); 
+    audioRef.current.currentTime = 0; 
+  }
+
+  function handleAudioToggle() {
+    if (isAudioEnabled) {
+      stopAudio(); 
+      setIsAudioEnabled(false); 
+      return; 
+    }
+
+    setIsAudioEnabled(true); 
+
+    if (user) { 
+      startAudio(); 
+    }
+  }
+
+  function handleLoginSuccess(user: User) {
+    setUser(user);
+    if (isAudioEnabled){
+      startAudio(); 
+    }
+  }
+
+
+  
 
   useEffect(() => {
     async function authCheck() {
@@ -53,6 +100,7 @@ function App() {
         throw new Error("Logout failed");
       }
       // clear user state client-side after server session is destroyed
+      stopAudio(); 
       setUser(null);
     } catch (error) {
       console.error(error);
@@ -75,7 +123,19 @@ function App() {
         onLogout={handleLogout}
         isBlurred={!user}
       />
-      {!user && <LoginModal onLoginSuccess={(user: User) => setUser(user)} />}
+
+      {user && (
+        <button
+          className="audio-toggle"
+          type="button"
+          onClick={handleAudioToggle}
+          aria-label={isAudioEnabled ? "Turn audio off" : "Turn audio on"}
+        >
+          {isAudioEnabled ? "♪" : "×"}
+        </button>
+      )}
+
+      {!user && <LoginModal onLoginSuccess={handleLoginSuccess} />}
     </>
   );
 }
