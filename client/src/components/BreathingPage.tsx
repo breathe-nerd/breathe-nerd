@@ -16,23 +16,6 @@ type BreathingPageProps = {
       - shrink during exhale
       - hold during pause
 
-  [ ] Finish user connection:
-      - confirm user name displays correctly after backend auth is complete
-      - keep fallback welcome message if user or name is missing
-
-  [ ] Use isBlurred prop:
-      - blur or visually soften the breathing page when LoginModal is open
-      - keep LoginModal as the focused foreground UI
-
-  [ ] Cleanup:
-      - remove temporary console logs
-      - set timeRemaining back to 140 after testing
-      - decide whether Stop should reset phase/count/timeRemaining
-      - add class names for completion screen styling
-      - make button text/capitalization consistent
-      - check spelling in comments
-      - test landing → breathing loop → completion → repeat
-      - test logout after backend auth routes are finished
 */
 
 function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
@@ -56,7 +39,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   const [breathe, setBreathe] = useState(false);
   const [phase, setPhase] = useState("notStarted");
   const [count, setCount] = useState(4);
-  const [timeRemaining, setTimeRemaining] = useState(60);
+  const [timeRemaining, setTimeRemaining] = useState(24);
   const [isComplete, setIsComplete] = useState(false);
 
   /* 
@@ -147,9 +130,8 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
           clearInterval(timer);
           setBreathe(false);
           setIsComplete(true);
-          return 60;
+          return 24;
         }
-        console.log("currentTime", currentTime);
         return currentTime - 1;
       });
 
@@ -200,6 +182,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   /* 
   Otherwise, render the main page:
   -apply CSS classes for layout and styling
+  -use isBlurred to soften page when LoginModal is on screen
   -display title
   -welcome message appears until breathing cycle begins
   -current breathing instruction begins when start button is clicked
@@ -210,7 +193,9 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   */
 
   return (
-    <main className="breathing-page">
+    <main
+      className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}
+    >
       <section className="breathing-content">
         <p className="app-title">Breathe Nerd</p>
         {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
