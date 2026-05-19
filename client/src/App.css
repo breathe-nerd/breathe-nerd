@@ -71,6 +71,57 @@
   outline: 2px solid rgba(232, 213, 136, 0.65);
 }
 
+.error-message {
+  margin: 0;
+  color: #ffd1d1;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.auth-button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: #e8d588;
+  color: #404040;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(232, 213, 136, 0.18);
+}
+
+.auth-button:hover {
+  background: #f0df98;
+}
+
+.auth-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.auth-switch {
+  margin: 1.25rem 0 0;
+  color: rgba(253, 250, 243, 0.75);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.auth-switch button {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: #e8d588;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-switch button:hover {
+  text-decoration: underline;
+}
+
 
 
 
