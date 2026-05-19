@@ -208,7 +208,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
         <p className="app-title">Breathe Nerd</p>
         {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
 
-        <h1 className="phase-display">{getPhaseDisplayText()}</h1>
+        <h1 className="phase-display" key={phase}>{getPhaseDisplayText()}</h1>
 
         <div className={`breathing-circle breathing-circle--${phase}`}>
           <span className="breathing-count">{getCountDisplayText()}</span>
