@@ -163,27 +163,37 @@
     align-items: center;
     margin-top: -2rem;
     margin-bottom: 2rem;
-    transition: transform 4s ease-in-out;
+    transition: transform 4s ease-in-out, background-color 4s ease-in-out, box-shadow 4s ease-in-out;
 }
 
 .breathing-circle--inhale {
   transform: scale(1);
+  background-color: #E8D588;
+  box-shadow: 0 0 50px rgba(232, 213, 136, 0.25);
 }
 
 .breathing-circle--pauseAfterInhale {
   transform: scale(1);
+  background-color: #E8D588;
+  box-shadow: 0 0 50px rgba(232, 213, 136, 0.25);
 }
 
 .breathing-circle--exhale {
   transform: scale(0.50);
+  background-color: #A8C5B5;
+  box-shadow: 0 0 35px rgba(168, 197, 181, 0.2);
+  transition: transform 6s ease-in-out, background-color 6s ease-in-out, box-shadow 6s ease-in-out;
 }
 
 .breathing-circle--pauseAfterExhale {
   transform: scale(0.50);
+  background-color: #A8C5B5;
+  box-shadow: 0 0 35px rgba(168, 197, 181, 0.2);
 }
 
 .breathing-circle--notStarted {
-  transform: scale(0.7)
+  transform: scale(0.7);
+  box-shadow: 0 0 20px rgba(232, 213, 136, 0.15);
 }
 
 .breathing-count {

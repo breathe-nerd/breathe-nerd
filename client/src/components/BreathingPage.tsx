@@ -82,7 +82,10 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
   function handleRepeat() {
     setIsComplete(false);
-    goToInhale();
+    setPhase("notStarted")
+    setTimeout(() => {
+      goToInhale();
+    }, 50)
   }
 
   /* 
