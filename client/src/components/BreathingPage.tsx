@@ -202,8 +202,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   return (
     <main
       key="breathing"
-      className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}
-    >
+      className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}>
       <section className="breathing-content">
         <p className="app-title">Breathe Nerd</p>
         {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
