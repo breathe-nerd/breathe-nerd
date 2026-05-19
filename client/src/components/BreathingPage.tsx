@@ -209,9 +209,27 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
         {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
 
         <h1 className="phase-display" key={phase}>{getPhaseDisplayText()}</h1>
+        <div className="circle-wrspper">
+          <svg className="progress-ring" viewBox="0 0 520 520">
+            <circle 
+              className="progress-ring__track"
+              cx="260"
+              cy="260"
+              r="252"
+            />
+            <circle
+              className="progress-ring__fill"
+              cx="260"
+              cy="260"
+              r="252"
+              strokeDasharray="1583"
+              strokeDashoffset={breathe ? 1583 - ((24 - timeRemaining) / 24 * 1583) : 1583}
+              />
+          </svg>
 
-        <div className={`breathing-circle breathing-circle--${phase}`}>
-          <span className="breathing-count">{getCountDisplayText()}</span>
+          <div className={`breathing-circle breathing-circle--${phase}`}>
+            <span className="breathing-count">{getCountDisplayText()}</span>
+          </div>
         </div>
 
         {!breathe && <button onClick={handleStart}>npm install calm</button>}
