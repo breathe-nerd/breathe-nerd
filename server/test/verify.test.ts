@@ -3,7 +3,7 @@ import request from 'supertest'
 import app from '../server.js'
 import { supabase } from '../db/supabaseClient.js'
 
-describe('/auth/verofy', async () => {
+describe('/auth/verify', async () => {
   beforeEach(async () => {
     await supabase.from('users').delete().eq('email', 'testuser@test.com')
   })
