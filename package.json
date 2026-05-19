@@ -11,7 +11,7 @@
     "build": "tsc -b && vite build client",
     "preview": "vite preview client",
     "start": "node --watch --import tsx/esm server/server.ts",
-    "test": "vitest"
+    "test": "NODE_ENV=test vitest"
   },
   "repository": {
     "type": "git",
