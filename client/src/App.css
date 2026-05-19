@@ -133,6 +133,12 @@
     align-items: center;
 }
 
+.breathing-page--burred {
+    filter: blur(6px);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
 .breathing-content {
     display: flex;
     flex-direction: column;
