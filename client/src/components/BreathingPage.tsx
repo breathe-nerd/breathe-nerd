@@ -68,16 +68,24 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   }
 
   function handleStart() {
-    goToInhale();
+    setPhase("notStarted");
+    setTimeout(() => {
+      goToInhale();
+    }, 50)
   }
 
   function handleStop() {
     setBreathe(false);
+    setPhase("notStarted");
+    setCount(4)
   }
 
   function handleRepeat() {
     setIsComplete(false);
-    goToInhale();
+    setPhase("notStarted")
+    setTimeout(() => {
+      goToInhale();
+    }, 50)
   }
 
   /* 
@@ -168,10 +176,9 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
   if (isComplete) {
     return (
-      <main className="breathing-page">
-        <section className="breathing-content">
+      <main key="complete" className="breathing-page">
+        <section className="breathing-content completion-screen">
           <h1>Session Promise Resolved</h1>
-
           <button onClick={handleRepeat}>run again</button>
           <button onClick={onLogout}>git checkout reality</button>
         </section>
@@ -194,16 +201,34 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
   return (
     <main
-      className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}
-    >
+      key="breathing"
+      className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}>
       <section className="breathing-content">
         <p className="app-title">Breathe Nerd</p>
         {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
 
-        <h1 className="phase-display">{getPhaseDisplayText()}</h1>
+        <h1 className="phase-display" key={phase}>{getPhaseDisplayText()}</h1>
+        <div className="circle-wrspper">
+          <svg className="progress-ring" viewBox="0 0 520 520">
+            <circle 
+              className="progress-ring__track"
+              cx="260"
+              cy="260"
+              r="252"
+            />
+            <circle
+              className="progress-ring__fill"
+              cx="260"
+              cy="260"
+              r="252"
+              strokeDasharray="1583"
+              strokeDashoffset={breathe ? 1583 - ((24 - timeRemaining) / 24 * 1583) : 1583}
+              />
+          </svg>
 
-        <div className="breathing-circle">
-          <span className="breathing-count">{getCountDisplayText()}</span>
+          <div className={`breathing-circle breathing-circle--${phase}`}>
+            <span className="breathing-count">{getCountDisplayText()}</span>
+          </div>
         </div>
 
         {!breathe && <button onClick={handleStart}>npm install calm</button>}
