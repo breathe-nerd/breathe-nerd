@@ -56,7 +56,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   const [breathe, setBreathe] = useState(false);
   const [phase, setPhase] = useState("notStarted");
   const [count, setCount] = useState(4);
-  const [timeRemaining, setTimeRemaining] = useState(24);
+  const [timeRemaining, setTimeRemaining] = useState(60);
   const [isComplete, setIsComplete] = useState(false);
 
   /* 
@@ -147,7 +147,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
           clearInterval(timer);
           setBreathe(false);
           setIsComplete(true);
-          return 24;
+          return 60;
         }
         console.log("currentTime", currentTime);
         return currentTime - 1;
