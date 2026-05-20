@@ -266,3 +266,26 @@
   justify-content: center;
   gap: 28px;
 }
+
+
+.audio-toggle {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 8;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(253, 250, 243, 0.92);
+  color: #404040;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+
+.audio-toggle:hover {
+  background: #e8d588;
+}
+ 
