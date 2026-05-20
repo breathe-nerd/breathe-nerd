@@ -148,7 +148,7 @@
     animation: fadeIn 0.8s ease-out;
 }
 
-.breathing-page--burred {
+.breathing-page--blurred {
     filter: blur(6px);
     opacity: 0.55;
     pointer-events: none;

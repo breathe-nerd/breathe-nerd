@@ -68,7 +68,12 @@ function App() {
   //LoginModal appears on top when user is logged out
   return (
     <>
-      <BreathingPage user={user} onLogout={handleLogout} isBlurred={!user} />
+      <BreathingPage
+        key={user ? "authenticated" : "logged-out"}
+        user={user}
+        onLogout={handleLogout}
+        isBlurred={!user}
+      />
       {!user && <LoginModal onLoginSuccess={(user: User) => setUser(user)} />}
     </>
   );
