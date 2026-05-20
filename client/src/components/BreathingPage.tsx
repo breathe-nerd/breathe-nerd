@@ -39,7 +39,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
   const [breathe, setBreathe] = useState(false);
   const [phase, setPhase] = useState("notStarted");
   const [count, setCount] = useState(4);
-  const [timeRemaining, setTimeRemaining] = useState(24);
+  const [timeRemaining, setTimeRemaining] = useState(42);
   const [isComplete, setIsComplete] = useState(false);
 
   /* 
@@ -54,7 +54,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
   function goToPauseAfterInhale() {
     setPhase("pauseAfterInhale");
-    setCount(1);
+    setCount(2);
   }
 
   function goToExhale() {
@@ -64,7 +64,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
 
   function goToPauseAfterExhale() {
     setPhase("pauseAfterExhale");
-    setCount(1);
+    setCount(2);
   }
 
   function handleStart() {
@@ -138,7 +138,7 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
           clearInterval(timer);
           setBreathe(false);
           setIsComplete(true);
-          return 24;
+          return 42;
         }
         return currentTime - 1;
       });
@@ -205,39 +205,21 @@ function BreathingPage({ user, onLogout, isBlurred }: BreathingPageProps) {
       className={`breathing-page ${isBlurred ? "breathing-page--blurred" : ""}`}
     >
       <section className="breathing-content">
-        <p className="app-title">Breathe, Nerd</p>
-        {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
+        <div className="border-circle">
+          <p className="app-title">Breathe, Nerd</p>
+          {!breathe && <p className="welcome-message">{welcomeMessage}</p>}
 
-        <h1 className="phase-display" key={phase}>
-          {getPhaseDisplayText()}
-        </h1>
-        <div className="circle-wrapper">
-          <svg className="progress-ring" viewBox="0 0 520 520">
-            <circle
-              className="progress-ring__track"
-              cx="260"
-              cy="260"
-              r="252"
-            />
-            <circle
-              className="progress-ring__fill"
-              cx="260"
-              cy="260"
-              r="252"
-              strokeDasharray="1583"
-              strokeDashoffset={
-                breathe ? 1583 - ((24 - timeRemaining) / 24) * 1583 : 1583
-              }
-            />
-          </svg>
+          <h1 className="phase-display" key={phase}>
+            {getPhaseDisplayText()}
+          </h1>
+        
+            <div className={`breathing-circle breathing-circle--${phase}`}>
+              <span className="breathing-count">{getCountDisplayText()}</span>
+            </div>
 
-          <div className={`breathing-circle breathing-circle--${phase}`}>
-            <span className="breathing-count">{getCountDisplayText()}</span>
-          </div>
+          {!breathe && <button onClick={handleStart}>npm install calm</button>}
+          {breathe && <button onClick={handleStop}>esc</button>}
         </div>
-
-        {!breathe && <button onClick={handleStart}>npm install calm</button>}
-        {breathe && <button onClick={handleStop}>esc</button>}
       </section>
     </main>
   );

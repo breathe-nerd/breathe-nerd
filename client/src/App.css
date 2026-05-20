@@ -184,46 +184,39 @@
 }
 
 .breathing-circle {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: #E8D588;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -2rem;
-    margin-bottom: 2rem;
-    transition: transform 4s ease-in-out, background-color 4s ease-in-out, box-shadow 4s ease-in-out;
+  width: 320px;
+  height: 320px;
+  min-width: 320px; 
+  min-height: 320px; 
+  border-radius: 50%;
+  background: #E8D588;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; 
+  box-shadow: 0 0 50px rgba(232, 213, 136, 0.25);
+  transition: transform 4s ease-in-out, background-color 4s ease-in-out, box-shadow 4s ease-in-out;
 }
 
 .breathing-circle--inhale {
   transform: scale(1);
-  background-color: #E8D588;
-  box-shadow: 0 0 50px rgba(232, 213, 136, 0.25);
 }
 
 .breathing-circle--pauseAfterInhale {
   transform: scale(1);
-  background-color: #E8D588;
-  box-shadow: 0 0 50px rgba(232, 213, 136, 0.25);
 }
 
 .breathing-circle--exhale {
   transform: scale(0.50);
-  background-color: #A8C5B5;
-  box-shadow: 0 0 35px rgba(168, 197, 181, 0.2);
   transition: transform 6s ease-in-out, background-color 6s ease-in-out, box-shadow 6s ease-in-out;
 }
 
 .breathing-circle--pauseAfterExhale {
   transform: scale(0.50);
-  background-color: #A8C5B5;
-  box-shadow: 0 0 35px rgba(168, 197, 181, 0.2);
 }
 
 .breathing-circle--notStarted {
   transform: scale(0.7);
-  box-shadow: 0 0 20px rgba(232, 213, 136, 0.15);
 }
 
 .breathing-count {
@@ -260,34 +253,16 @@
   animation-fill-mode: both;
 }
 
-.circle-wrapper {
+.border-circle {
   position: relative;
-  width: 520px;
-  height: 520px;
+  width: 800px;
+  height: 800px;
+  padding: 3rem;
+  border: 2px solid rgba(255, 250, 240, 0.3);
+  border-radius: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.progress-ring {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.progress-ring__track {
-  fill: none;
-  stroke: rgba(255, 250, 240, 0.1);
-  stroke-width: 3;
-}
-
-.progress-ring__fill {
-  fill: none;
-  stroke: rgba(255, 250, 240, 0.4);
-  stroke-width: 3;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 1s linear;
+  gap: 28px;
 }
