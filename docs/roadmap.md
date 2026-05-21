@@ -30,8 +30,9 @@ The MVP is complete when:
 - A logged-out user cannot access protected pages.
 - A logged-in user can complete the guided breathing exercise.
 - The database structure is ready to support future breathing-session records.
+## Posible Features
 
-## Stretch 1: Breathing-Session Tracking
+## 1: Breathing-Session Tracking
 
 Goal: add the first layer of personal progress tracking after the MVP works end to end.
 
@@ -52,7 +53,7 @@ This stage is complete when:
 - Users only see their own breathing-session data.
 - The dashboard shows real data from the database.
 
-## Stretch 2: Habit-Building Features
+## 2: Habit-Building Features
 
 Goal: make Breathe Nerd more useful for repeated use.
 
@@ -63,14 +64,14 @@ Goal: make Breathe Nerd more useful for repeated use.
 
 These features should stay optional and should not make the app feel heavy.
 
-## Stretch 3: Social Extensions
+## 3: Social Extensions
 
 Goal: explore features that reduce friction or add lightweight community.
 
 - Live breathing room showing how many people are currently doing an exercise.
 
 
-## Stretch 4: Multiple Exurcises
+## 4: Multiple Exercises
 
 Goal: give user more options to pick from.
 

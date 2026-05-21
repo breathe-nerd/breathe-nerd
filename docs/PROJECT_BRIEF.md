@@ -34,7 +34,7 @@ mood_after
 duration
 ```
 
-## Stretch Features
+## Possible Features
 
 Stretch features are optional additions that can make the app more useful after the MVP is complete.
 
@@ -57,6 +57,3 @@ Stretch features are optional additions that can make the app more useful after 
 - Keeping auth sessions clearly separate from future breathing-session records.
 - Planning for future dashboard stats without requiring the dashboard in the MVP.
 
-## Success Criteria
-
-The MVP is successful when a logged-in user can access a protected route and complete one guided breathing exercise. The app should feel quick, calm, and easy to use in the middle of a workday.
