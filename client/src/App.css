@@ -1,0 +1,291 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* LoginModal */
+.modal-overlay {
+    position: fixed; 
+    inset: 0; 
+    z-index:10; 
+    display: grid; 
+    place-items: center;
+    padding: 1.5rem; 
+    background: rgba(20, 20, 20, 0.45);
+    animation: fadeIn 0.5s ease-out;
+}
+
+
+.login-modal {
+    width: min(100%,420px); 
+    padding: 2.25rem;
+    border: 1px solid rgba(232, 213, 136, 0.28);
+    border-radius: 8px;
+    background: rgba(48, 48, 48, 0.96);
+    color: #f7f3ea;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.modal-title {
+    margin: 0;
+    color: #ffffff;
+    font-family: "Quicksand", system-ui, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center; 
+}
+
+.modal-subtitle {
+    margin: 0.5rem 0 1.5rem;
+    color: #e8d588;
+    font-size: 0.95rem; 
+    line-height: 1.4;
+    text-align: center;
+
+}
+
+.auth-form {
+    display: grid; 
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    display: grid;
+    gap: 0.45rem; 
+    color: #fdfaf3;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgba(253, 250, 243, 0.22);
+  border-radius: 8px;
+  background: rgba(28, 28, 28, 0.45);
+  color: #fdfaf3;
+}
+
+.form-group input:focus {
+  outline: 2px solid rgba(232, 213, 136, 0.65);
+}
+
+.error-message {
+  margin: 0;
+  color: #ffd1d1;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.auth-button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: #e8d588;
+  color: #404040;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(232, 213, 136, 0.18);
+}
+
+.auth-button:hover {
+  background: #f0df98;
+}
+
+.auth-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.auth-switch {
+  margin: 1.25rem 0 0;
+  color: rgba(253, 250, 243, 0.75);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.auth-switch button {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: #e8d588;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-switch button:hover {
+  text-decoration: underline;
+}
+
+/* BreathingPage */
+.breathing-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.breathing-page--blurred {
+    filter: blur(6px);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.breathing-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+}
+
+.breathing-content button {
+    font: inherit;
+    font-size: 1.35rem;
+    font-weight: 700;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 999px;
+    background: #fdfaf3;
+    color: #404040;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.breathing-content button:hover {
+  transform: scale(1.04);
+}
+
+.breathing-content button:active {
+  transform: scale(0.97)
+}
+
+.breathing-circle {
+  width: 320px;
+  height: 320px;
+  min-width: 320px; 
+  min-height: 320px; 
+  border-radius: 50%;
+  background: #E8D588;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; 
+  box-shadow: 0 0 50px rgba(232, 213, 136, 0.25);
+  transition: transform 4s ease-in-out, background-color 4s ease-in-out, box-shadow 4s ease-in-out;
+}
+
+.breathing-circle--inhale {
+  transform: scale(1);
+}
+
+.breathing-circle--pauseAfterInhale {
+  transform: scale(1);
+}
+
+.breathing-circle--exhale {
+  transform: scale(0.50);
+  transition: transform 6s ease-in-out, background-color 6s ease-in-out, box-shadow 6s ease-in-out;
+}
+
+.breathing-circle--pauseAfterExhale {
+  transform: scale(0.50);
+}
+
+.breathing-circle--notStarted {
+  transform: scale(0.7);
+}
+
+.breathing-count {
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fdfaf3;
+}
+
+.app-title {
+    font-size: 3rem;
+    color: rgba(255, 250, 240, 0.75);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-message {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(255, 250, 240, 0.55);
+    margin-bottom: 1rem;
+}
+
+.phase-display {
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fffaf0;
+    animation: fadeInText 1.2s ease-out;
+}
+
+.completion-screen {
+  animation: fadeIn 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.border-circle {
+  position: relative;
+  width: 800px;
+  height: 800px;
+  padding: 3rem;
+  border: 2px solid rgba(255, 250, 240, 0.3);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+
+.audio-toggle {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 8;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(253, 250, 243, 0.92);
+  color: #404040;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+
+.audio-toggle:hover {
+  background: #e8d588;
+}
+ 

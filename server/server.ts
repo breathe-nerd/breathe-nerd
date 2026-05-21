@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import session from 'express-session'
 import authRouter from './routes/auth.js'
+import { isAuthenticated } from './middleware/isAuthenticated.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -31,6 +32,16 @@ app.use((err:Error, _req:Request, res:Response, _next:NextFunction) => {
   res.status(500).json({ error : "Internal Server Error" })
 })
 
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`)
-})
+if (process.env.NODE_ENV === 'test') {
+  app.get('/test-protected', isAuthenticated, (req: Request, res: Response) => {
+    res.status(200).json({message: 'authenticated'})
+  })
+}
+
+export default app
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`)
+  })
+}

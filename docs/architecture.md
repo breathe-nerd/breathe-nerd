@@ -29,42 +29,63 @@ The MVP does not require:
 
 ## Project Scaffold
 
-The intended project shape is:
+The current project shape is:
 
 ```text
 breathe-nerd/
 |-- client/
-|   |-- src/
-|   |   |-- main.tsx
-|   |   |-- App.tsx
-|   |   |-- App.css
-|   |   |-- index.css
-|   |   |-- types.ts
-|   |   `-- components/
-|   |       |-- LoginModal.tsx
-|   |       `-- BreathingPage.tsx
-|   `-- package.json 
+|   |-- index.html
+|   |-- vite.config.ts
+|   |-- tsconfig.json
+|   |-- favicon.png
+|   `-- src/
+|       |-- main.tsx
+|       |-- App.tsx
+|       |-- App.css
+|       |-- index.css
+|       |-- types.ts
+|       |-- assets/
+|       |   `-- ocean-waves.mp3
+|       `-- components/
+|           |-- LoginModal.tsx
+|           `-- BreathingPage.tsx
 |-- server/
-|   |-- src/
-|   |   |-- server.ts
-|   |   |-- routes/
-|   |   |   `-- auth.routes.ts
-|   |   |-- middleware/
-|   |   |   `-- isAuthenticated.ts
-|   |   |-- controllers/
-|   |   |   `-- auth.controller.ts
-|   |   `-- db/
-|   |       `-- supabase.ts
-|   `-- package.json
+|   |-- server.ts
+|   |-- routes/
+|   |   `-- auth.ts
+|   |-- middleware/
+|   |   `-- isAuthenticated.ts
+|   |-- db/
+|   |   `-- supabaseClient.ts
+|   `-- test/
+|       |-- signup.test.ts
+|       |-- verify.test.ts
+|       `-- isAuthenticated.test.ts
 |-- docs/
-|-- .env
-|-- .gitignore
+|   |-- README.md
+|   |-- PROJECT_BRIEF.md
+|   |-- API_CONTRACT.md
+|   |-- DATABASE_SCHEMA.md
+|   |-- architecture.md
+|   |-- roadmap.md
+|   |-- TODO.md
+|   `-- FEATURE_OWNERSHIP.md
+|-- .github/
+|   `-- PULL_REQUEST_TEMPLATE.md
 |-- package.json
+|-- package-lock.json
+|-- tsconfig.json
+|-- tsconfig.app.json
+|-- tsconfig.node.json
+|-- vitest.config.ts
+|-- eslint.config.js
+|-- AGENTS.md
+|-- CONTRIBUTING.md
 |-- README.md
-`-- PROJECT_BRIEF.md
+`-- .gitignore
 ```
 
-This scaffold is a guide, not a requirement to create every file immediately.
+The repo currently uses one root `package.json` for both the client and server scripts. Local environment variables belong in an untracked `.env` file.
 
 ## Frontend Responsibilities
 
@@ -359,12 +380,13 @@ Those names appeared in early notes, but the current project docs prefer `/auth/
 
 ## Design Notes From Team Input
 
-Current useful frontend design ideas:
+Current frontend design choices:
 
 - Calm dark background around `#404040`.
 - Warm breathing circle color around `#E8D588`.
-- Display title using `DM Serif Display`.
+- App text uses `Quicksand`.
 - Breathing circle animation synced to inhale, hold, and exhale phases.
-- Optional ocean audio and mute button.
+- Looping ocean-wave audio starts after successful login/signup while audio is enabled.
+- A fixed audio toggle lets authenticated users turn the looping audio off or back on.
 
-Audio is polish, not an MVP blocker. Browser audio should start only after user interaction, such as pressing a start button.
+Browser audio should still only start after user interaction, such as submitting the login/signup form or pressing an audio control. The current app keeps the audio object stable with `useRef` instead of creating a new `Audio` instance on every render.

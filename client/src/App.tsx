@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { User } from "./types";
 import LoginModal from "./components/LoginModal";
 import BreathingPage from "./components/BreathingPage";
+import "./App.css";
+import oceanWaves from "./assets/ocean-waves.mp3";
 
 /*
   Responsibilities:
@@ -18,6 +20,53 @@ import BreathingPage from "./components/BreathingPage";
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  function startAudio() {
+    if (!audioRef.current) { 
+      audioRef.current = new Audio(oceanWaves); 
+      audioRef.current.loop = true; 
+      audioRef.current.volume = 0.3; 
+    }
+
+    audioRef.current.play().catch((error) => {
+      console.error("Audio failed to play:", error);
+    });
+  }
+
+  function stopAudio() {
+    if (!audioRef.current) {
+      return; 
+    }
+
+    audioRef.current.pause(); 
+    audioRef.current.currentTime = 0; 
+  }
+
+  function handleAudioToggle() {
+    if (isAudioEnabled) {
+      stopAudio(); 
+      setIsAudioEnabled(false); 
+      return; 
+    }
+
+    setIsAudioEnabled(true); 
+
+    if (user) { 
+      startAudio(); 
+    }
+  }
+
+  function handleLoginSuccess(user: User) {
+    setUser(user);
+    if (isAudioEnabled){
+      startAudio(); 
+    }
+  }
+
+
+  
 
   useEffect(() => {
     async function authCheck() {
@@ -51,6 +100,7 @@ function App() {
         throw new Error("Logout failed");
       }
       // clear user state client-side after server session is destroyed
+      stopAudio(); 
       setUser(null);
     } catch (error) {
       console.error(error);
@@ -59,14 +109,35 @@ function App() {
 
   // prevent app render until auth check completes
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>npm installing calm...</p>;
+    //make separate loading page component and pass function into here and style it with css
   }
 
-  if (!user) {
-    return <LoginModal onLoginSuccess={(user: User) => setUser(user)} />;
-  }
+  //BreathingPAge is always visible
+  //LoginModal appears on top when user is logged out
+  return (
+    <>
+      <BreathingPage
+        key={user ? "authenticated" : "logged-out"}
+        user={user}
+        onLogout={handleLogout}
+        isBlurred={!user}
+      />
 
-  return <BreathingPage user={user} onLogout={handleLogout} />;
+      {user && (
+        <button
+          className="audio-toggle"
+          type="button"
+          onClick={handleAudioToggle}
+          aria-label={isAudioEnabled ? "Turn audio off" : "Turn audio on"}
+        >
+          {isAudioEnabled ? "♪" : "×"}
+        </button>
+      )}
+
+      {!user && <LoginModal onLoginSuccess={handleLoginSuccess} />}
+    </>
+  );
 }
 
 export default App;

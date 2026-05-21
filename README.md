@@ -24,7 +24,7 @@ For this project, the MVP includes:
 - A home or exercise page with one guided breathing technique, a timer, and a clean calming interface.
 - A database prepared for future breathing-session tracking without building the full dashboard yet.
 
-## Stretch Features
+## Possible Features
 
 Stretch features are optional improvements that should only be started after the MVP works end to end.
 
@@ -49,12 +49,58 @@ Stretch features are optional improvements that should only be started after the
 | Testing/API tools | Postman / Yaak |
 | Version control | Git, GitHub |
 
+## Getting Started
+
+Use these steps to get a local prototype running.
+
+1. Clone the repository and install dependencies from the repo root:
+
+```bash
+git clone https://github.com/breathe-nerd/breathe-nerd.git
+cd breathe-nerd
+npm install
+```
+
+2. Create a local `.env` file in the repo root. This file is ignored by Git and should not be committed.
+
+```bash
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_SERVICE_KEY=your_supabase_service_role_key
+SESSION_SECRET=replace_with_a_long_random_string
+PORT=3000
+```
+
+3. Set up the Supabase database.
+
+At minimum, the app needs the `users` table for signup and login. Use the schema in `docs/DATABASE_SCHEMA.md` as the source of truth.
+
+4. Start the client and server together:
+
+```bash
+npm run dev
+```
+
+The Express server runs on `http://localhost:3000` by default. The Vite client runs on the local URL printed in the terminal, usually `http://localhost:5173`.
+
+5. Optional checks before opening a pull request:
+
+```bash
+npm run type-check:server
+npm run type-check:client
+npm test
+```
+
 ## Team
 
 | Area | Owners | Focus |
 | --- | --- | --- |
-| Frontend | John, Kanami | Breathing UI, exercise flow, frontend routes |
-| Backend | Maia, Adel | Auth routes, protected routes, Supabase setup, future breathing-session schema |
+
+Example:
+
+| Area | Owners | Focus |
+| --- | --- | --- |
+| Frontend | name | Breathing UI, auth modal, client-side state, styling |
+| Backend | name | Auth routes, protected routes, Supabase queries, future breathing-session routes |
 
 ## MVP API Targets
 
@@ -99,15 +145,25 @@ breathe-nerd/
 |-- README.md
 `-- PROJECT_BRIEF.md
 ```
+For a more extensive scaffold see docs/architecture.md.
+
 
 ## Development Workflow
 
-1. Create a branch from `main` before starting a feature.
+1. Create a branch from `dev` before starting a feature.
 2. Build only the feature or task assigned to that branch.
 3. Test the change locally or with Postman when applicable.
-4. Push the branch to GitHub.
-5. Open a pull request into `main`.
-6. Request review from someone working on the related frontend or backend area.
+4. Before opening a pull request, pull the latest `dev` and merge it into your branch.
+5. Push the branch to GitHub.
+6. Open a pull request into `dev`.
+7. Request review
+
+```bash
+git switch dev
+git pull
+git switch your-branch-name
+git merge dev
+```
 
 ## Project Milestones
 
